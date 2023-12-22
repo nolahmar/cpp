@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 20:14:56 by noni              #+#    #+#             */
-/*   Updated: 2023/12/15 10:44:05 by nolahmar         ###   ########.fr       */
+/*   Created: 2023/12/19 17:12:15 by nolahmar          #+#    #+#             */
+/*   Updated: 2023/12/19 17:15:42 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <iostream>
 
-class Fixed {
-    private :
-            int _fixed_value;
-            static const int _fract_bits = 8;
-    public :
-            Fixed();
-            Fixed(const Fixed& copy);
-            ~Fixed();
-            Fixed &operator=(const Fixed &src);
-            int     getRawBits( void ) const;
-            void    setRawBits( int const raw );
-};
+class Brain
+{
+private:
+    std::string _ideas[100];
 
-#endif
+public:
+    Brain( void );
+    ~Brain( void );
+    Brain(const Brain& src);
+    Brain& operator=(const Brain& rhs);
+};
+ 
+#endif 

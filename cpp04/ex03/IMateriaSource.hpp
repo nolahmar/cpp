@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 20:14:56 by noni              #+#    #+#             */
-/*   Updated: 2023/12/15 10:44:05 by nolahmar         ###   ########.fr       */
+/*   Created: 2023/12/22 13:19:11 by nolahmar          #+#    #+#             */
+/*   Updated: 2023/12/22 16:01:08 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#ifndef IMATERIASOURCE_HPP
+#define IMATERIASOURCE_HPP
 
-#include <iostream>
+#include "AMateria.hpp"
 
-class Fixed {
-    private :
-            int _fixed_value;
-            static const int _fract_bits = 8;
-    public :
-            Fixed();
-            Fixed(const Fixed& copy);
-            ~Fixed();
-            Fixed &operator=(const Fixed &src);
-            int     getRawBits( void ) const;
-            void    setRawBits( int const raw );
+class IMateriaSource
+{
+    public:
+        virtual ~IMateriaSource() {}
+        virtual void learnMateria(AMateria*) = 0;
+        virtual AMateria* createMateria(std::string const & type) = 0;
 };
 
 #endif

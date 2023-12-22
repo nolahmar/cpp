@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:30:03 by noni              #+#    #+#             */
-/*   Updated: 2023/11/29 16:26:52 by noni             ###   ########.fr       */
+/*   Updated: 2023/12/18 08:54:10 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,10 @@ Fixed	Fixed::operator--()
 	return (*this);
 }
 
-// Overloaded post-increment Operators
+// Overloaded post-increment Operators (a--)
 Fixed	Fixed::operator++(int)
 {
 	Fixed tmp = *this;
-	// i = this->_fp_value;
 	++this->_fixed_value;
 	return (tmp);
 }
@@ -155,7 +154,6 @@ Fixed	Fixed::operator++(int)
 Fixed	Fixed::operator--(int)
 {
 	Fixed tmp = *this;
-	// i = this->_fp_value;
 	--this->_fixed_value;
 	return (tmp);
 }

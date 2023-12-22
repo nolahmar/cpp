@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 00:53:05 by noni              #+#    #+#             */
-/*   Updated: 2023/11/28 20:38:15 by noni             ###   ########.fr       */
+/*   Updated: 2023/12/15 10:48:15 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ Fixed::~Fixed()
 
 Fixed& Fixed::operator=(const Fixed& src) 
 {
-    // Vérifie l'auto-affectation
     std::cout << "Fixed Assignation operator called" << std::endl;
     if (this != &src) {
         // Copie les valeurs depuis l'objet source vers l'objet actuel
