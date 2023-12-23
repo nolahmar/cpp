@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 10:22:45 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/22 16:41:46 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 10:58:21 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #define ICHARACTER_HPP
 
 #include <iostream>
-// #include "AMateria.hpp"
 class AMateria;
 
 class ICharacter
-{
+{   
     public:
         virtual ~ICharacter() {}
         virtual std::string const & getName() const = 0;

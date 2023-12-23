@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:38:35 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/20 14:08:22 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 13:56:38 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Dog::Dog() :Animal("Dog")
 {
-    std::cout <<_type << "constructor called" << std::endl;
+    std::cout <<_type << " constructor called" << std::endl;
 }
 
 Dog::~Dog()

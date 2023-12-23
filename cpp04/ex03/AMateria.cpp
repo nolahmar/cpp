@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:11:28 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/22 10:46:57 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:01:10 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ AMateria::AMateria(AMateria const & src)
 AMateria& AMateria::operator=(const AMateria& rhs) 
 {
     if (this != &rhs) 
-    {
-        type = rhs.type;
-    }
+        _type = rhs._type;
     return *this;
 }
 

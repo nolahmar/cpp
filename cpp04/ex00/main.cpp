@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:52:30 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/19 16:59:47 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 13:55:18 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int main()
     
     std::cout <<  "Wrong type " << mimon->getType() << " " << std::endl;
     std::cout << "WrongCat type " <<  bassabisso->getType() << " " << std::endl;
+    mimon->makeSound();
+    bassabisso->makeSound();
     
     delete mimon;
     delete bassabisso;

@@ -6,22 +6,20 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:03:34 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/22 16:48:58 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:27:40 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character(std::string const &name) : _name(name)
+Character::Character(std::string const &name) : _name(name), _addresses(NULL), _tail(NULL)
 {
-    for (int i = 0; i < 4; i++) {
-        _index[i] = NULL;
-        _emptySlots = 0;
-    }
+    for (int i = 0; i < 4; i++)
+        _inventory[i] = NULL;
     std::cout << "Character " <<_name << " created" << std::endl;
 }
 
-Character::Character(Character const &src) : _name(src._name)
+Character::Character(Character const &src)
 {
     *this = src;
     std::cout << "Character " << _name << " created" << std::endl;
@@ -32,8 +30,14 @@ Character& Character::operator=(Character const &rhs)
     if (this != &rhs)
     {
         _name = rhs._name;
-        for (int i = 0; i < 4; i++)
-            _index[i] = rhs._index[i];
+        for (int i = 0; i < 4; i++) {
+            if (_inventory[i])
+                delete _inventory[i];
+            if (rhs._inventory[i])
+                _inventory[i] = rhs._inventory[i]->clone();
+            else
+                _inventory[i] = NULL;
+        }
     }
     return *this;
 }
@@ -45,42 +49,82 @@ std::string const& Character::getName() const
 
 Character::~Character()
 {
+    // destroy saved addresses
+    while (_addresses)
+    {
+        _addresses->deleteAddress();
+        _addresses = _addresses->getNext();
+    }
+    
+    // destroy address from inventory
     for (int i = 0; i < 4; i++)
-        if (_index[i])
-            delete _index[i];
+        if (_inventory[i])
+            delete _inventory[i];
     std::cout << "Character " <<_name << " destroyed" << std::endl;
 }
 
-void    Character::equip( AMateria* m )
+void    Character::equip(AMateria* m)
 {
     for (int i = 0; i < 4; i++)
     {
-        if (_emptySlots[i])
+        if (!_inventory[i])
         {
-            _index[i] = m;
-            _emptySlots[i] = 1;
-                return;
+            _inventory[i] = m;
+            return;
         }
     }
-    std::cout << "Character " <<_name << "  " << m->getType() << std::endl;
+    std::cout << "Can't add new AMateria, inventory is full " << std::endl;
 }
 
 void Character::unequip(int idx)
 {
-    if (idx < 0 || idx >= 4 || !_emptySlots[idx])
+    if (idx < 0 || idx >= 4)
     {
-        std::cout << "" << std::endl;
+        std::cout << "Invalid idx: " << ((idx < 0) ? "idx < 0" : "idx out of range") << std::endl;
         return ;
     }
-    _emptySlots[idx] = 0;
+    if (!_inventory[idx])
+    {
+        std::cout << "Inventory at " << idx << " is empty" << std::endl;
+        return ;
+    }
+    // save address
+    _addBack(new Address(_inventory[idx]));
+    _inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-    if (idx < 0 || idx >= 4 || !_emptySlots[idx])
+    if (idx < 0 || idx >= 4)
     {
-        std::cout << "" << std::endl;
+        std::cout << "Invalid idx: " << ((idx < 0) ? "idx < 0" : "idx out of range") << std::endl;
         return ;
     }
-    _index[idx]->use(target);
+    if (!_inventory[idx])
+    {
+        std::cout << "Inventory at " << idx << " is empty" << std::endl;
+        return ;
+    }
+    _inventory[idx]->use(target);
 }
+
+void Character::_addBack(Address *newNode)
+{
+    if (!_addresses)
+    {
+        _addresses = newNode;
+        _tail = newNode;
+        return;
+    }
+    _tail->next(newNode);
+    _tail = newNode;
+}
+
+
+Address::Address(AMateria *address): _ptr(address), _next(NULL) {}
+
+void Address::deleteAddress(void) { delete _ptr; }
+
+void Address::next(Address *next_node) { _next = next_node; }
+
+Address* Address::getNext(void) const { return _next; }

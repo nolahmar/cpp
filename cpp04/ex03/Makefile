@@ -1,4 +1,4 @@
-SRC = main.cpp AMateria.cpp Cure.cpp Ice.cpp character.cpp MateriaSource.cpp
+SRC = main.cpp AMateria.cpp Cure.cpp Ice.cpp Character.cpp MateriaSource.cpp
 OBJ = $(SRC:.cpp=.o)
 CXX = c++
 RM = rm -f

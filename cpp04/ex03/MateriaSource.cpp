@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:21:43 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/22 15:38:45 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:35:56 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ MateriaSource::MateriaSource()
 {
     for (int i = 0; i < 4; i++)
         _materia[i] = NULL;
+    std::cout << "Materia source created " << std::endl;
 }
 
 MateriaSource::~MateriaSource()
@@ -35,7 +36,14 @@ MateriaSource& MateriaSource::operator=(MateriaSource const & rhs)
     if (this != &rhs)
     {
         for (int i = 0; i < 4; i++)
-            _materia[i] = rhs._materia[i];
+        {
+            if (_materia[i])
+                delete _materia[i];
+            if (rhs._materia[i])
+                _materia[i] = rhs._materia[i]->clone();
+            else
+                _materia[i] = NULL;
+        }
     }
     return *this;
 }
@@ -45,7 +53,7 @@ void    MateriaSource::learnMateria(AMateria* m)
     for (int i = 0; i < 4; i++)
         if (_materia[i] == NULL)
         {
-            _materia[i] = m;
+            _materia[i] = m->clone();
             return;
         }
 }

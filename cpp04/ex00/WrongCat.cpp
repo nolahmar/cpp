@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:55:42 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/19 16:40:01 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 13:56:18 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 WrongCat::WrongCat() :WrongAnimal("WrongCat")
 {
-    std::cout << this->_type << "constructor called" << std::endl;
+    std::cout << this->_type << " constructor called" << std::endl;
 }
 
 WrongCat::~WrongCat()

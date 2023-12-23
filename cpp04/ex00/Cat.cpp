@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:38:19 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/20 14:07:23 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/23 13:56:45 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Cat::Cat() :Animal("Cat")
 {
-    std::cout <<_type << "constructor called" << std::endl;
+    std::cout <<_type << " constructor called" << std::endl;
 }
 
 Cat::~Cat()
