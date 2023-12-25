@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:47:27 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 12:09:34 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 10:41:55 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Ice::Ice() : AMateria("ice")
 {
-
+                                                                                                                                                                                                                                                                                                                                                                            
 }
 
 Ice::Ice(Ice const & src)

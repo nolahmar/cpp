@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:22:02 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/22 10:17:24 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 13:15:11 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ AAnimal& AAnimal::operator=(const AAnimal& rhs)
     }
     return *this;
 }
-
-/*void AAnimal::makeSound() const
-{
-    std::cout << "Animal make sound called" << std::endl;
-}*/
 
 std::string    AAnimal::getType( void ) const
 {

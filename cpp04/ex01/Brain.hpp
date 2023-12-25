@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:12:15 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/19 17:15:42 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 12:25:04 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@
 
 class Brain
 {
-private:
-    std::string _ideas[100];
-
-public:
-    Brain( void );
-    ~Brain( void );
-    Brain(const Brain& src);
-    Brain& operator=(const Brain& rhs);
+    private:
+        std::string _ideas[100];
+    public:
+        Brain(void);
+        ~Brain(void);
+        Brain(const Brain& src);
+        Brain& operator=(const Brain& rhs);
 };
  
 #endif 

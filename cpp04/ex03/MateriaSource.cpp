@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:21:43 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 12:35:56 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 15:07:08 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ MateriaSource::MateriaSource()
 {
     for (int i = 0; i < 4; i++)
         _materia[i] = NULL;
-    std::cout << "Materia source created " << std::endl;
+    // std::cout << "Materia source created " << std::endl;
 }
 
 MateriaSource::~MateriaSource()

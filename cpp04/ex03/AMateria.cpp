@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:11:28 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 11:01:10 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 15:06:47 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ AMateria::AMateria()
 
 AMateria::AMateria(std::string const &type) : _type(type)
 {
-    std::cout << "AMateria " << _type << " created" << std::endl;
+    // std::cout << "AMateria " << _type << " created" << std::endl;
 }
 
 AMateria::~AMateria()

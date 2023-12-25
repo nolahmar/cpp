@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:52:30 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 13:55:18 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:43:10 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main()
     const WrongAnimal *mimon = new WrongAnimal();
     const WrongAnimal *bassabisso = new WrongCat();
     
-    std::cout <<  "Wrong type " << mimon->getType() << " " << std::endl;
     std::cout << "WrongCat type " <<  bassabisso->getType() << " " << std::endl;
     mimon->makeSound();
     bassabisso->makeSound();
@@ -43,5 +42,5 @@ int main()
     delete mimon;
     delete bassabisso;
 
-return 0;
+    return 0;
 }

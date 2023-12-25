@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:03:34 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 12:27:40 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 15:06:29 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ Character::Character(std::string const &name) : _name(name), _addresses(NULL), _
 {
     for (int i = 0; i < 4; i++)
         _inventory[i] = NULL;
-    std::cout << "Character " <<_name << " created" << std::endl;
+    // std::cout << "Character " <<_name << " created" << std::endl;
 }
 
 Character::Character(Character const &src)
 {
     *this = src;
-    std::cout << "Character " << _name << " created" << std::endl;
+    // std::cout << "Character " << _name << " created" << std::endl;
 }
 
 Character& Character::operator=(Character const &rhs)
@@ -60,7 +60,7 @@ Character::~Character()
     for (int i = 0; i < 4; i++)
         if (_inventory[i])
             delete _inventory[i];
-    std::cout << "Character " <<_name << " destroyed" << std::endl;
+    // std::cout << "Character " <<_name << " destroyed" << std::endl;
 }
 
 void    Character::equip(AMateria* m)

@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:38:35 by nolahmar          #+#    #+#             */
-/*   Updated: 2023/12/23 13:56:38 by nolahmar         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:35:03 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 Dog::Dog() :Animal("Dog")
 {
-    std::cout <<_type << " constructor called" << std::endl;
+    std::cout <<_type << " constructed" << std::endl;
 }
 
 Dog::~Dog()
 {
-    std::cout <<_type << " destructor called" << std::endl;
+    std::cout <<_type << " destructed" << std::endl;
 }
 
 Dog::Dog( const Dog& src )
@@ -29,7 +29,7 @@ Dog::Dog( const Dog& src )
 
 Dog& Dog::operator=( const Dog& src )
 {
-    std::cout << "Dog copy called." << std::endl;
+    std::cout << "Dog copy called" << std::endl;
     if (this != &src)
     {
         _type = src._type;
