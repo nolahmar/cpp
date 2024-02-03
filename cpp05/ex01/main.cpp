@@ -6,24 +6,22 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:59:08 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/01 16:04:27 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:12:22 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-int main() {
+int main()
+{
     try {
-        Bureaucrat bureaucrat("mimon", 22);
-        std::cout << bureaucrat << std::endl;
-        bureaucrat.incrementGrade();
-        std::cout << bureaucrat << std::endl;
-        bureaucrat.decrementGrade();
-        std::cout << bureaucrat << std::endl;
-        Bureaucrat invalidBureaucrat("Invalid", 0);
-    } 
-    catch (const std::exception& error) {
-        std::cerr << "Error: " << error.what() << std::endl;
+        Bureaucrat bureaucrat("Xxxx",11);
+        Form form("formName", 10);
+        bureaucrat.signForm(form);
+        std::cout << form << std::endl;
+    }
+    catch (std::exception &error) {
+        std::cout << error.what() << std::endl;
     }
     return 0;
 }
