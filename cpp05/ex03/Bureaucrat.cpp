@@ -1,24 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 13:59:34 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 10:57:31 by nolahmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : _name("Dfaulte"), _grade(0)
 {
-    if (_grade < 1)
-        throw Bureaucrat::GradeTooHighException();
-    else if (_grade > 150)
-        throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
@@ -89,8 +73,9 @@ void    Bureaucrat::signForm(Form &form)
 {
     try
     {
-        form.beSigned(*this);
-        std::cout << "The bureaucrat" << " signed " << form.getName() << std::endl;
+        form.getSigned();
+        std::cout << form.getName() << " signed" << std::endl;
+        form.setSigned(true);
     }
     catch(const std::exception& e)
     {
@@ -107,7 +92,6 @@ void    Bureaucrat::executeForm(Form const & form)
     }
     catch(const std::exception& e)
     {
-        std::cout << form.getName() << " not executed" << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 }
-

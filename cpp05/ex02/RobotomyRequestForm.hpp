@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:18:29 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/03 16:02:42 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:52:52 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ class RobotomyRequestForm : public Form
         void execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<(std::ostream &os, const RobotomyRequestForm &robot);
+std::ostream &operator<<(std::ostream &out, const RobotomyRequestForm &robot);
 
 #endif

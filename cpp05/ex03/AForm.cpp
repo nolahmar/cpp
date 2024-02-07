@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 11:59:43 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:46 by nolahmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# include "AForm.hpp"
 
-# include "Form.hpp"
-
-Form::Form():_gradeToSign(0), _gradeToExecute(0)
+Form::Form() : _name("Default"), _gradeToSign(0), _gradeToExecute(0)
 {
 }
 
@@ -27,6 +15,7 @@ Form::Form(const Form &copy) : _name(copy._name), _signed(copy._signed), _gradeT
 
 Form&   Form::operator=(const Form &copy)
 {
+    std::cout << "Assignation operator called" << std::endl;
     if (this != &copy)
     {
         _signed = copy.getSigned();
@@ -36,7 +25,6 @@ Form&   Form::operator=(const Form &copy)
 
 Form::~Form()
 {
-
 }
 
 std::string Form::getName() const
@@ -59,12 +47,9 @@ int         Form::getGradeToExecute() const
     return (_gradeToExecute);
 }
 
-void        Form::beSigned(const Bureaucrat &bureaucrat)
+void        Form::setSigned(bool sign)
 {
-    if (bureaucrat.getGrade() <= _gradeToSign)
-        _signed = true;
-    else
-        throw Form::GradeTooLowException();
+    _signed = sign;
 }
 
 const char* Form::GradeTooHighException::what() const throw()

@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:17:00 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/03 16:13:13 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:53:51 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define SHRUBBERYCREATIONFORM
 
 #include "AForm.hpp"
+#include <fstream>
 
 class ShrubberyCreationForm : public Form
 {
@@ -24,10 +25,10 @@ class ShrubberyCreationForm : public Form
         ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm(ShrubberyCreationForm const &src);
         ~ShrubberyCreationForm();
-        ShrubberyCreationForm& operator=(const ShrubberyCreationForm &other);
+        ShrubberyCreationForm& operator=(const ShrubberyCreationForm &rhs);
         void execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<(std::ostream &out, const ShrubberyCreationForm &shr);
+std::ostream &operator<<(std::ostream &out, const ShrubberyCreationForm &shrub);
 
 #endif

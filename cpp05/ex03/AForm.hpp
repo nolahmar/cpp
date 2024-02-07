@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 11:58:52 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:52 by nolahmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FORM_HPP
 # define FORM_HPP
 
@@ -21,7 +9,7 @@
 class Form
 {
     private:
-        std::string const _name;
+        const std::string _name;
         bool _signed;
         int const _gradeToSign;
         int const _gradeToExecute;
@@ -31,14 +19,18 @@ class Form
             Form(std::string name, int gradeToSign, int gradeToExecute);
             Form(const Form &copy);
             Form &operator=(const Form &copy);
-            ~Form();
+            virtual ~Form();
+            // this will allow the right derived class's destructor to be called when you delete the pointer to the base class, 
+            // this way you can release the memory allocated to an object created by new.
 
             std::string getName() const;
             bool        getSigned() const;
             int         getGradeToSign() const;
             int         getGradeToExecute() const;
-            void        beSigned(const Bureaucrat &bureaucrat);
+            void        setSigned(bool sign);
 
+            // we should make it as an abstract class
+            virtual void        execute(Bureaucrat const & executor) const = 0;
 
             class GradeTooHighException : public std::exception
             {

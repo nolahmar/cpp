@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 11:59:35 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:39 by nolahmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
@@ -38,6 +26,8 @@ class Bureaucrat
         void          decrementGrade();
 
         void    signForm(Form &form);
+        void    executeForm(Form const & form);
+
 
         class GradeTooHighException : public std::exception
         {
