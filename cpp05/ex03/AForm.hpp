@@ -20,16 +20,11 @@ class Form
             Form(const Form &copy);
             Form &operator=(const Form &copy);
             virtual ~Form();
-            // this will allow the right derived class's destructor to be called when you delete the pointer to the base class, 
-            // this way you can release the memory allocated to an object created by new.
-
             std::string getName() const;
             bool        getSigned() const;
             int         getGradeToSign() const;
             int         getGradeToExecute() const;
             void        setSigned(bool sign);
-
-            // we should make it as an abstract class
             virtual void        execute(Bureaucrat const & executor) const = 0;
 
             class GradeTooHighException : public std::exception
