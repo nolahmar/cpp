@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:58:44 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:58:47 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:35:48 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
     if (_grade < 1)
         throw Bureaucrat::GradeTooHighException();
-    else if (_grade > 150)
+    if (_grade > 150)
         throw Bureaucrat::GradeTooLowException();
 }
 
@@ -37,6 +37,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &rhs)
 {
     if (this != &rhs)
         _grade = rhs.getGrade();
+        // _name : Copie automatique grâce à la sémantique de copie
     return (*this);
 }
 
@@ -52,16 +53,16 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-    if (_grade <= 1)
-        throw Bureaucrat::GradeTooHighException();
     _grade--;
+    if (_grade < 1)
+        throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade()
 {
-    if (_grade >= 150)
-        throw Bureaucrat::GradeTooLowException();
     _grade++;
+    if (_grade > 150)
+        throw Bureaucrat::GradeTooLowException();
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
@@ -76,6 +77,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &rhs)
 {
-    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << "." << std::endl;
     return (o);
 }

@@ -6,31 +6,36 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:59:43 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:46 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:34:32 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Form.hpp"
 
-Form::Form():_gradeToSign(0), _gradeToExecute(0)
+Form::Form():_name("default"), _signed(false), _gradeToSign(0), _gradeToExecute(0)
 {
 }
 
-Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
+Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name)
+    , _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
+    if (_gradeToExecute < 1 || _gradeToSign < 1)
+        throw Form::GradeTooHighException();
+    if (_gradeToExecute > 150 || _gradeToSign > 150)
+       throw Form::GradeTooLowException();
     _signed = false;
 }
 
-Form::Form(const Form &copy) : _name(copy._name), _signed(copy._signed), _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
+Form::Form(const Form &copy) : _name(copy._name)
+    , _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
 {
+    *this = copy;
 }
 
 Form&   Form::operator=(const Form &copy)
 {
     if (this != &copy)
-    {
         _signed = copy.getSigned();
-    }
     return (*this);
 }
 

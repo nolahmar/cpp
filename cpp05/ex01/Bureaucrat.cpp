@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:59:26 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:30 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:13:22 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-    if (_grade <= 1)
-        throw Bureaucrat::GradeTooHighException();
     _grade--;
+    if (_grade < 1)
+        throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade()
 {
-    if (_grade >= 150)
-        throw Bureaucrat::GradeTooLowException();
     _grade++;
+    if (_grade > 150)
+        throw Bureaucrat::GradeTooLowException();
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
@@ -77,7 +77,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &rhs)
 {
-    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << "." << std::endl;
     return (o);
 }
 
@@ -86,10 +86,10 @@ void    Bureaucrat::signForm(Form &form)
     try
     {
         form.beSigned(*this);
-        std::cout << "The bureaucrat" << " signed " << form.getName() << std::endl;
+        std::cout << this->_name << " signed " << form.getName() << std::endl;
     }
     catch(const std::exception& e)
     {
-        std::cout << "The bureaucrat" << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+        std::cout << this->_name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
     }
 }

@@ -6,17 +6,17 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:17:00 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 10:53:51 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:28:20 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM
-#define SHRUBBERYCREATIONFORM
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 #include <fstream>
 
-class ShrubberyCreationForm : public Form
+class ShrubberyCreationForm : public AForm
 {
     private:
         std::string _target;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 15:00:28 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/20 15:00:31 by nolahmar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Creation Form", 145, 137)
@@ -24,13 +36,22 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     _target = rhs._target;
     return *this;
 }
+
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
     if (!getSigned())
         throw Form::GradeTooLowException();
 
     if (executor.getGrade() <= getGradeToExecute()) {
         std::ofstream outfile(_target + "_shrubbery");
-        outfile << "ASCII Art of Trees";  // Add your ASCII art here
+        outfile << "       _-_\n"; 
+        outfile << "    /~~   ~~\\\n";
+        outfile << " /~~         ~~\\\n";
+        outfile << "{               }\n";
+        outfile << " \\  _-     -_  /\n";
+        outfile << "   ~  \\ //  ~\n";
+        outfile << "_- -   | | _- _\n";
+        outfile << "  _ -  | |   -_\n";
+        outfile << "      // \\\\\n";
         outfile.close();
         std::cout << "ShrubberyCreationForm executed successfully by " << executor.getName() << std::endl;
     } else {
@@ -38,8 +59,8 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
     }
 }
 
-std::ostream &operator<<(std::ostream &o, const ShrubberyCreationForm &shr)
+std::ostream &operator<<(std::ostream &out, const ShrubberyCreationForm &shr)
 {
-    o << "Shrubbery Creation Form: " << shr.getName() << ", grade to sign: " << shr.getGradeToSign() << ", grade to execute: " << shr.getGradeToExecute() << ", signed: " << shr.getSigned() << std::endl;
-    return o;
+    out << "Shrubbery Creation Form: " << shr.getName() << ", grade to sign: " << shr.getGradeToSign() << ", grade to execute: " << shr.getGradeToExecute() << ", signed: " << shr.getSigned() << std::endl;
+    return out;
 }

@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:59:03 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:15 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:25:12 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ class Bureaucrat
 };
 
 std::ostream &  operator<<(std::ostream & o, Bureaucrat const & rhs);
-
 #endif

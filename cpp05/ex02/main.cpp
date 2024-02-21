@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:59:08 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/06 14:36:54 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:23:48 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int main( void )
     catch (std::exception &error) {
         std::cout << error.what() << std::endl;
     }
-    return EXIT_SUCCESS;
+    return 0;
 }
