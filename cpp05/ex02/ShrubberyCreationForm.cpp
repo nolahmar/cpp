@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:17:14 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 16:40:01 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:17:39 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubb
     _target = target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src): AForm(src)
 {
     *this = src;
 }
@@ -33,6 +33,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
 {
+    AForm::operator=(rhs);
     if (this != &rhs)
         _target = rhs._target;
     return *this;
@@ -41,33 +42,24 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
     if (!getSigned())
         throw AForm::AFormNotSignedException();
+    if (executor.getGrade() > getGradeToExecute())
+        throw AForm::CouldNotExecuteException();
 
-    if (executor.getGrade() <= getGradeToExecute()) {
-        std::ofstream outfile(_target + "_shrubbery");
+    std::ofstream outfile(_target + "_shrubbery");
 
-        if (!outfile.is_open())
-        {
-            std::cerr << "Can't open the file " << _target << "_shruberry" << std::endl;
-            exit(1);
-        }
-        outfile << "       _-_\n"; 
-        outfile << "    /~~   ~~\\\n";
-        outfile << " /~~         ~~\\\n";
-        outfile << "{               }\n";
-        outfile << " \\  _-     -_  /\n";
-        outfile << "   ~  \\ //  ~\n";
-        outfile << "_- -   | | _- _\n";
-        outfile << "  _ -  | |   -_\n";
-        outfile << "      // \\\\\n";
-        outfile.close();
+    if (!outfile.is_open())
+    {
+        std::cerr << "Can't open the file " << _target << "_shruberry" << std::endl;
+        exit(1);
     }
-    else {
-        std::cout << executor.getName() << " couldn't execute ShrubberyCreationForm because of low grade." << std::endl;
-    }
-}
-
-std::ostream &operator<<(std::ostream &out, const ShrubberyCreationForm &shr)
-{
-    out << "Shrubbery Creation Form: " << shr.getName() << ", grade to sign: " << shr.getGradeToSign() << ", grade to execute: " << shr.getGradeToExecute() << ", signed: " << shr.getSigned() << std::endl;
-    return out;
+    outfile << "       _-_\n"; 
+    outfile << "    /~~   ~~\\\n";
+    outfile << " /~~         ~~\\\n";
+    outfile << "{               }\n";
+    outfile << " \\  _-     -_  /\n";
+    outfile << "   ~  \\ //  ~\n";
+    outfile << "_- -   | | _- _\n";
+    outfile << "  _ -  | |   -_\n";
+    outfile << "      // \\\\\n";
+    outfile.close();
 }

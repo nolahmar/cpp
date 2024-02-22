@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 15:02:06 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 15:02:07 by nolahmar         ###   ########.fr       */
+/*   Created: 2024/02/03 14:18:29 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/21 16:01:29 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM
-#define ROBOTOMYREQUESTFORM
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
 
-class RobotomyRequestForm : public Form
+class RobotomyRequestForm : public AForm
 {
     private:
         std::string _target;
@@ -27,7 +27,5 @@ class RobotomyRequestForm : public Form
         RobotomyRequestForm& operator=(const RobotomyRequestForm &rhs);
         void execute(Bureaucrat const & executor) const;
 };
-
-std::ostream &operator<<(std::ostream &o, const RobotomyRequestForm &robot);
 
 #endif

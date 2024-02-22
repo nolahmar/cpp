@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:01:30 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 15:01:32 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:01:16 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-class Form;
-class PresidentialPardonForm;
-class RobotomyRequestForm;
-class ShrubberyCreationForm;
-
 class Intern
 {
     public:
@@ -34,7 +29,7 @@ class Intern
 
         Intern & operator=(Intern const & rhs);
 
-        Form *makeForm(std::string const & formName, std::string target);
+        AForm *makeForm(std::string const & formName, std::string target);
 };
 
 

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 15:01:55 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 15:01:56 by nolahmar         ###   ########.fr       */
+/*   Created: 2024/02/03 14:19:31 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/21 16:19:05 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTALPARDONFORM
-#define PRESIDENTALPARDONFORM
+#ifndef PRESIDENTALPARDONFORM_HPP
+#define PRESIDENTALPARDONFORM_HPP
 
 #include "AForm.hpp"
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
     private:
         std::string _target;
@@ -27,7 +27,5 @@ class PresidentialPardonForm : public Form
         PresidentialPardonForm& operator=(const PresidentialPardonForm &rhs);
         void execute(Bureaucrat const & executor) const;
 };
-
-std::ostream &operator<<(std::ostream &out, const PresidentialPardonForm &pres);
 
 #endif

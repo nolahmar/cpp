@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:33:37 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 16:27:53 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:47:50 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ void        AForm::beSigned(const Bureaucrat &bureaucrat)
         std::cout << "The form status has been validated successfully" << std::endl;
     }
     else
-    {
         throw AForm::GradeTooLowException();
-    }
 }
 
 const char* AForm::GradeTooHighException::what() const throw()
@@ -84,6 +82,11 @@ const char* AForm::GradeTooLowException::what() const throw()
 const char* AForm::AFormNotSignedException::what() const throw()
 {
     return ("The form is not signed");
+}
+
+const char* AForm::CouldNotExecuteException::what() const throw()
+{
+    return ("Grade too low, can't execute the form");
 }
 
 std::ostream& operator<<(std::ostream &out, const AForm &form)

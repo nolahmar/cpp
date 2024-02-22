@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:33:22 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 16:24:30 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:55:30 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ class AForm
         };
 
         class AFormNotSignedException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+
+        class CouldNotExecuteException : public std::exception
         {
             public:
                 virtual const char *what() const throw();

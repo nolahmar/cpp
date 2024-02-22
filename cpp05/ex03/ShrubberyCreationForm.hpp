@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 15:02:16 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/20 15:02:17 by nolahmar         ###   ########.fr       */
+/*   Created: 2024/02/03 14:17:00 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/21 16:01:45 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM
-#define SHRUBBERYCREATIONFORM
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 #include <fstream>
 
-class ShrubberyCreationForm : public Form
+class ShrubberyCreationForm : public AForm
 {
     private:
         std::string _target;
@@ -28,7 +28,5 @@ class ShrubberyCreationForm : public Form
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm &rhs);
         void execute(Bureaucrat const & executor) const;
 };
-
-std::ostream &operator<<(std::ostream &o, const ShrubberyCreationForm &shrub);
 
 #endif
