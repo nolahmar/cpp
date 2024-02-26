@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:59:08 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/21 16:52:14 by noni             ###   ########.fr       */
+/*   Updated: 2024/02/26 17:44:04 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int main( void )
     std::cout << "---------------------- Execute Robotomy  ------------------" << std::endl;
     try {
         Bureaucrat b("mimon", 40);
-        AForm *tree = new RobotomyRequestForm("Matrix");
+        AForm *robot = new RobotomyRequestForm("Matrix");
 
-        b.signForm(*tree);
-        b.executeForm(*tree);
+        b.signForm(*robot);
+        b.executeForm(*robot);
     } 
     catch (std::exception &error) {
         std::cout << error.what() << std::endl;
@@ -84,10 +84,10 @@ int main( void )
     std::cout << "---------------------- Execute Presidentila Pardon  ---------" << std::endl;
     try {
         Bureaucrat b("mimon", 1);
-        AForm *tree = new PresidentialPardonForm("President");
+        AForm *prd = new PresidentialPardonForm("President");
 
-        b.signForm(*tree);
-        b.executeForm(*tree);
+        b.signForm(*prd);
+        b.executeForm(*prd);
     } 
     catch (std::exception &error) {
         std::cout << error.what() << std::endl;

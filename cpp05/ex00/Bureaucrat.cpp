@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:58:44 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/19 14:35:48 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:57:16 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &rhs)
 {
     if (this != &rhs)
         _grade = rhs.getGrade();
-        // _name : Copie automatique grâce à la sémantique de copie
     return (*this);
 }
 

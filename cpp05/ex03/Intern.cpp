@@ -27,6 +27,7 @@ Intern::~Intern()
 
 Intern & Intern::operator=(Intern const & rhs)
 {
+    (void)rhs;
     return *this;
 }
 
@@ -47,9 +48,9 @@ AForm *makePresidentialPardonForm(std::string target)
 
 AForm *Intern::makeForm(std::string const & formName, std::string target)
 {
-    typedef AForm *(*funcPtr)(std::string target);
     std::string formNameArray[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-    funcPtr funcArray[3] = {&makeShrubberyCreationForm, &makeRobotomyRequestForm, &makePresidentialPardonForm};
+    AForm* (*funcArray[])(std::string target) = {&makeShrubberyCreationForm, &makeRobotomyRequestForm, &makePresidentialPardonForm};
+    
     for (int i = 0; i < 3; i++)
     {
         if (formName == formNameArray[i])

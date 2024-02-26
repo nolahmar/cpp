@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:33:37 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/21 16:47:50 by noni             ###   ########.fr       */
+/*   Updated: 2024/02/26 17:17:32 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute) : _name(name
 AForm::AForm(const AForm &copy) : _name(copy._name), _signed(copy._signed),
     _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
 {
+    
 }
 
 AForm&   AForm::operator=(const AForm &copy)
