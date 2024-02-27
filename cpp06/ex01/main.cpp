@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:41:21 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/27 18:38:12 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:07:40 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,10 @@ int main() {
     std::cout << "Deserialized Data: \nName: " << deserializedData->name
               << "\nAge: " << deserializedData->age << std::endl;
     delete data;
+    int* ptr = new int(10);
+    uintptr_t intAddress = reinterpret_cast<uintptr_t>(ptr);
+    std::cout << intAddress << std::endl;
+    int *a = reinterpret_cast<int*>(intAddress);
+    std::cout << *a << std::endl;
     return 0;
 }
