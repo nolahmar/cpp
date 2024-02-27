@@ -5,28 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 11:20:51 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/13 13:18:10 by nolahmar         ###   ########.fr       */
+/*   Created: 2024/02/27 17:33:25 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/27 17:44:02 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cstdlib>
-class Base {
-    public:
-        virtual ~Base();
-};
-
-class A: public Base {};
-class B: public Base {};
-class C: public Base {};
-
-Base::~Base() {
-    
-}
+# include "Base.hpp"
 
 Base* generate(void) {
     int random = rand() % 3;
+
     switch (random) {
         case 0:
             return new A();
@@ -70,8 +58,15 @@ void identify(Base &p) {
 }
 
 int main() {
-  Base* object = generate();
+    srand(time(0));
+    Base* object = generate();
     identify(object);
+    delete object;
+    object = generate();
+    identify(object);
+    delete object;
+    object = generate();
+    identify(*object);
     delete object;
     return 0; 
 }

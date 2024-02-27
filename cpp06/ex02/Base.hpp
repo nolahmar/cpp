@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 14:41:24 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/27 17:27:20 by nolahmar         ###   ########.fr       */
+/*   Created: 2024/02/27 17:32:41 by nolahmar          #+#    #+#             */
+/*   Updated: 2024/02/27 17:42:25 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#ifndef BASE_HPP
+#define BASE_HPP
 
-#include <cstdint>
 #include <iostream>
+#include <cstdlib>
 
-struct Data {
-    int age;
-    std::string name;
-};
-
-class Serializer {
+class Base {
     public:
-        Serializer();
-        Serializer(Serializer const& x);
-        Serializer& operator=(Serializer const& x);
-        ~Serializer();
-
-        static uintptr_t serialize(Data* ptr);
-        static Data* deserialize(uintptr_t raw);      
+        virtual ~Base();
 };
+
+class A: public Base {};
+class B: public Base {};
+class C: public Base {};
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert.hpp                                        :+:      :+:    :+:   */
+/*   Convert.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:05:01 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/12 12:00:55 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:25:05 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@
 #include <cctype>
 #include <cmath>
 
-class ScalarConvertert {
+class ScalarConverter {
     public:
-       static bool isValidNumber(const std::string& str);
-       static void convert(const std::string& literal);
+        ScalarConverter();
+        ScalarConverter(ScalarConverter const& x);
+        ScalarConverter& operator=(ScalarConverter const& x);
+        ~ScalarConverter();
+        static bool isValidNumber(const std::string& str);
+        static void convert(const std::string& literal);
 };
 
 # endif
