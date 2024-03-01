@@ -1,15 +1,15 @@
 SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
-CXX = c++
+CC = c++
 RM = rm -f
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = Array
+NAME = IterStack
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

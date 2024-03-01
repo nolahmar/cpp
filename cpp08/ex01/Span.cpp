@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:09 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/26 14:43:39 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:16:43 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ Span::Span()
     
 }
 
-Span::Span(unsigned int n)
+Span::Span(unsigned int n): _n(n), _v()
 {
-    _n = n;
     _v.reserve(n);
 }
 
@@ -45,10 +44,10 @@ Span& Span::operator=(const Span &copy)
 
 void Span::addNumber(int n)
 {
-    if (_v.empty())
-        throw std::exception();
+    if (_v.size() < _n)
+        _v.push_back(n);   
     else
-        _v.push_back(_n);   
+        throw std::exception();
 }
 
 int Span::shortestSpan()
@@ -56,8 +55,7 @@ int Span::shortestSpan()
     int min;
     if (_v.size() < 2)
         throw std::exception();
-    else
-        std::sort(_v.begin(), _v.end());
+    std::sort(_v.begin(), _v.end());
     min = _v[1] - _v[0];
     for (unsigned int i = 0; i < _v.size() - 1; i++)
     {
@@ -69,7 +67,6 @@ int Span::shortestSpan()
 
 int Span::longestSpan()
 {
-    int max;
     if (_v.size() < 2)
         throw std::exception();
     std::sort(_v.begin(), _v.end());
