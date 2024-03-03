@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:15:28 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/01 16:25:18 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:36:46 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,19 @@ mstack.push(737);
 mstack.push(0);
 MutantStack<int>::iterator it = mstack.begin();
 MutantStack<int>::iterator ite = mstack.end();
+MutantStack<int>::reverse_iterator rit = mstack.rbegin();
+MutantStack<int>::reverse_iterator rite = mstack.rend();
 ++it;
 --it;
 while (it != ite)
 {
 std::cout << *it << std::endl;
 ++it;
+}
+while (rit != rite)
+{
+    std::cout << *rit << std::endl;
+    ++rit;
 }
 std::stack<int> s(mstack);
 return 0;

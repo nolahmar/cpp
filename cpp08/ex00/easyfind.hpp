@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 13:44:29 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/26 11:34:40 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/03 16:34:35 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 template <typename T>
 int easyfind(T &container, int n)
 {
-    typename T::iterator it = std::find(container.begin(), container.end(), n);
-    if (it == container.end())
+    typename T::iterator iter = std::find(container.begin(), container.end(), n);
+    if (iter == container.end())
         throw std::exception();
-    return *it;
+    return *iter;
 }
 
 #endif

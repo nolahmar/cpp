@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 13:55:21 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/24 14:07:54 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/03 17:26:26 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(void)
     v.push_back(3);
     v.push_back(4);
     v.push_back(5);
+    
     try
     {
         std::cout << easyfind(v, 3) << std::endl;
