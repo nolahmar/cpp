@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:15:53 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/02/26 14:40:34 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:02:34 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ class Span {
         ~Span();
         Span &operator=(const Span &copy);
         void addNumber(int n);
-        int shortestSpan();
-        int longestSpan();
+        long long shortestSpan();
+        long long longestSpan();
         void addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 };
                     

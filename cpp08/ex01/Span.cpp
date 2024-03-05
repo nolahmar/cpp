@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:09 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/03 17:43:07 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:07:10 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Span::Span()
     
 }
 
-Span::Span(unsigned int n): _n(n), _v()
+Span::Span(unsigned int n): _n(n)
 {
     _v.reserve(n);
 }
@@ -50,27 +50,28 @@ void Span::addNumber(int n)
         throw std::exception();
 }
 
-int Span::shortestSpan()
+long long Span::shortestSpan()
 {
-    int min;
+    long long min;
+
     if (_v.size() < 2)
         throw std::exception();
     std::sort(_v.begin(), _v.end());
-    min = _v[1] - _v[0];
+    min = (long long)_v[1] - (long long)_v[0];
     for (unsigned int i = 0; i < _v.size() - 1; i++)
     {
-        if (_v[i + 1] - _v[i] < min)
-        min = _v[i + 1] - _v[i];
+        if ((long long)_v[i + 1] - (long long)_v[i] < min)
+            min = (long long)_v[i + 1] - (long long)_v[i];
     }
     return min;
 }
 
-int Span::longestSpan()
+long long Span::longestSpan()
 {
     if (_v.size() < 2)
         throw std::exception();
     std::sort(_v.begin(), _v.end());
-    return (_v.back() - _v.front());
+    return ((long long)_v.back() - (long long)_v.front());
 }
 
 void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)

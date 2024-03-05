@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:15:06 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/03 18:21:20 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:14:11 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ class MutantStack:public std::stack<T, Container> {
         virtual ~MutantStack() {};
         MutantStack(const MutantStack& copy): std::stack<T, Container>(copy) {};
         MutantStack& operator=(const MutantStack& copy) {
-            std::stack<T, Container>::operatar=(copy);
+            std::stack<T, Container>::operator=(copy);
+            return *this;
         };
 
     typedef typename Container::iterator iterator;
