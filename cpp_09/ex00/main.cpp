@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:50:15 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/05 14:50:57 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:45:07 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-int main(int ac, char **av)
-{
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " input_file.txt" << std::endl;
+        return 1;
+    }
 
-	if (ac != 2)
-	{
-		std::cout << "Error: could not open file" << std::endl;
-		return ;
-	}
+    std::string inputFilename = argv[1];
+    BitcoinExchange exchange;
+    exchange.read_data("data.csv");
+    exchange.readAndVerifyFile(inputFilename);
 
-	BitcoinExchange exchange;
-
-	return 0;
+    return 0;
 }

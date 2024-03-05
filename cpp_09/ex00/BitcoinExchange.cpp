@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:30:14 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/05 14:55:59 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:51:57 by noni             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
 
 bool BitcoinExchange::isValidNumber(const std::string& value) {
     try {
-        size_t pos;
-        double number = std::stod(value, &pos);
+        size_t pos = 0;
+        //double number = std::stod(value, &pos);
         if (pos != value.size()) 
             throw std::invalid_argument("Error: Invalid characters after number.");
         if (value.back() == '.') 
