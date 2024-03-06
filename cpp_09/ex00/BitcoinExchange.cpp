@@ -103,16 +103,16 @@ void BitcoinExchange::isValidDate(std::string& date) {
     if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31)
         throw std::invalid_argument("Invalide date => " + date);
     if ((day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)) || (day > 29 && month == 2))
-        throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for month)");
+        throw std::invalid_argument("Invalid date => " + date);
     else if (day > 31)
-        throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for month)");
+        throw std::invalid_argument("Invalid date => " + date);
     else if (month == 2) {
         if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
             if (day > 29)
-                throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for February in a leap year)");
+                throw std::invalid_argument("Invalid date => " + date);
         } 
             if (day > 28)
-                throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for February in a non-leap year)");
+                throw std::invalid_argument("Invalid date => " + date);
         }
 }
 
