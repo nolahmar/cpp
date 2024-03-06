@@ -183,17 +183,6 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
     file.close();
 }
 
-void BitcoinExchange::countMonthDays() 
-{
-            char* months31[] = {"01", "03", "05", "07", "08", "10", "12"};
-            char* months30[] = {"04", "06", "09", "11"};
-
-            for (char* month :months31)
-                _date[month] = 31;
-            for (char* month : months30) 
-                _date[month] = 30;
-}
-
 bool BitcoinExchange::isValidMonthLength(const std::string& date) const 
 {
     int year = std::stoi(date.substr(0, 4));
