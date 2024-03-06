@@ -36,9 +36,24 @@ BitcoinExchange::~BitcoinExchange()
     
 }
 
-bool BitcoinExchange::isEmpty() const
+int BitcoinExchange::ft_stoi(const std::string &str)
 {
-    return _data.empty();
+    std::stringstream ss(str);
+    int value;
+
+    ss >> value;
+
+    return value;
+}
+
+double BitcoinExchange::ft_stod(const std::string &str)
+{
+    std::stringstream ss(str);
+    double value;
+
+    ss >> value;
+
+    return value;
 }
 
 void BitcoinExchange::read_data(const std::string& filename)
@@ -81,13 +96,24 @@ void BitcoinExchange::isValidDate(std::string& date) {
         throw std::invalid_argument("Invalide date => " + date);
     if (!isdigit(day_str[0]) || !isdigit(day_str[1]))
         throw std::invalid_argument("Invalide date => " + date);
-    int year = std::stoi(year_str);
-    int month = std::stoi(month_str);
-    int day = std::stoi(day_str);
+    int year = ft_stoi(year_str);
+    int month = ft_stoi(month_str);
+    int day = ft_stoi(day_str);
 
     if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31)
         throw std::invalid_argument("Invalide date => " + date);
-    
+    if ((day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)) || (day > 29 && month == 2))
+        throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for month)");
+    else if (day > 31)
+        throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for month)");
+    else if (month == 2) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            if (day > 29)
+                throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for February in a leap year)");
+        } 
+            if (day > 28)
+                throw std::invalid_argument("Invalid date => " + date + " (day exceeds maximum for February in a non-leap year)");
+        }
 }
 
 void BitcoinExchange::isValidNumber(const std::string& value) {
@@ -120,7 +146,7 @@ void BitcoinExchange::isValidNumber(const std::string& value) {
         }
         throw std::invalid_argument("Invalide number => " + value);
     }
-    long long max_value = std::stoll(value);
+    double  max_value = ft_stod(value);
     if (max_value > std::numeric_limits<int>::max())
         throw std::invalid_argument("too large a number");
     if (!found_digit)
@@ -152,13 +178,19 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
         return;
     }
     if (!std::getline(file, line) || line != "date | value") {
-        std::cout << "Error: Format de fichier invalide\n";
+        std::cout << "Error: Invalid file format\n";
+        file.close();
+        return;
+    }
+     if (file.eof()) {
+        std::cout << "Error: Empty file after header\n";
+        file.close();
         return;
     }
     while (std::getline(file, line)) {
         size_t delim = line.find('|');
         if (delim == std::string::npos) {
-            std::cout << "Error: Format de ligne invalide => " << line << '\n';
+            std::cout << "Error: bad input  => " << line << '\n';
             continue;
         }
         std::string date = line.substr(0, delim);
@@ -167,14 +199,21 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
         try {
             isValidDate(date);
             isValidNumber(value);
+
             std::map<std::string, std::string>::iterator it;
-            it = _data.lower_bound(date);
-          if (it != _data.end()) {
-                std::cout << date << " => " << value << " = "
-                          << std::stod(it->second) * std::stod(value) << std::endl;
-            } 
-            else 
-                std::cout << "Error: Date not found in map => " << date << '\n';
+
+            if (_data.count(date) == 1) {
+                std::cout << date << " => " << value << " = " << std::stod(_data[date]) * std::stod(value) << std::endl;
+            }
+            else {
+                it = _data.lower_bound(date);
+                if (it != _data.begin()) {
+                    --it;
+                    std::cout << date << " => " << value << " = " << std::stod(it->second) * std::stod(value) << std::endl;
+                }
+                else 
+                    std::cout << "Error: Date not found in map => " << date << '\n';
+            }
         } 
         catch (const std::exception& e) {
             std::cerr << "Error: " << e.what() << std::endl;
@@ -183,21 +222,3 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
     file.close();
 }
 
-bool BitcoinExchange::isValidMonthLength(const std::string& date) const 
-{
-    int year = std::stoi(date.substr(0, 4));
-    int month = std::stoi(date.substr(5, 2));
-
-    if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12))
-        return true;  // Months with 31 days
-    else if (month == 4 || month == 6 || month == 9 || month == 11)
-        return true;  // Months with 30 days
-    else if (month == 2) {
-        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-            return true; // Fevrier 29
-        else
-            return false;
-    }
-    else 
-        return false;  // Invalid month
-}
