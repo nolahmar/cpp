@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "ostream": "cpp",
-        "iosfwd": "cpp",
         "__bit_reference": "cpp",
         "__config": "cpp",
         "__debug": "cpp",
@@ -24,7 +23,6 @@
         "bitset": "cpp",
         "cctype": "cpp",
         "chrono": "cpp",
-        "clocale": "cpp",
         "cmath": "cpp",
         "complex": "cpp",
         "cstdarg": "cpp",
@@ -43,6 +41,7 @@
         "initializer_list": "cpp",
         "iomanip": "cpp",
         "ios": "cpp",
+        "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "iterator": "cpp",

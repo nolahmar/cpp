@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:30:14 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/05 20:51:57 by noni             ###   ########.fr       */
+/*   Updated: 2024/03/06 15:11:45by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,48 +63,84 @@ void BitcoinExchange::read_data(const std::string& filename)
    file.close();
 }
 
-bool BitcoinExchange::isValidDate(const std::string& date) {
-    if (date.size() != 10)
-        return false; 
+void BitcoinExchange::isValidDate(std::string& date) {
+    if (date.size() != 11)
+        throw std::invalid_argument("Invalide date => " + date);
+    if (date.back() != ' ')
+        throw std::invalid_argument("Invalide date => " + date);
+    date.pop_back();
     if (date[4] != '-' || date[7] != '-')
-        return false;
-    std::string yearStr = date.substr(0, 4);
-    std::string monthStr = date.substr(5, 2);
-    std::string dayStr = date.substr(8, 2);
-    try {
-        int year = std::stoi(yearStr);
-        int month = std::stoi(monthStr);
-        int day = std::stoi(dayStr);
+        throw std::invalid_argument("Invalide date => " + date);
+    std::string year_str = date.substr(0, 4);
+    std::string month_str = date.substr(5, 2);
+    std::string day_str = date.substr(8, 2);
 
-        if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31)
-            return false;
-        return true;
-    } 
-    catch (const std::exception& e) {
-        return false;
-    }
+    if (!isdigit(year_str[0]) || !isdigit(year_str[1]) || !isdigit(year_str[2]) || !isdigit(year_str[3]))
+        throw std::invalid_argument("Invalide date => " + date);
+    if (!isdigit(month_str[0]) || !isdigit(month_str[1]))
+        throw std::invalid_argument("Invalide date => " + date);
+    if (!isdigit(day_str[0]) || !isdigit(day_str[1]))
+        throw std::invalid_argument("Invalide date => " + date);
+    int year = std::stoi(year_str);
+    int month = std::stoi(month_str);
+    int day = std::stoi(day_str);
+
+    if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31)
+        throw std::invalid_argument("Invalide date => " + date);
+    
 }
 
-bool BitcoinExchange::isValidNumber(const std::string& value) {
-    try {
-        size_t pos = 0;
-        //double number = std::stod(value, &pos);
-        if (pos != value.size()) 
-            throw std::invalid_argument("Error: Invalid characters after number.");
-        if (value.back() == '.') 
-            throw std::invalid_argument("Error: Number cannot end with a point.");
-        size_t dotCount = std::count(value.begin(), value.end(), '.');
-        if (dotCount > 1)
-            throw std::invalid_argument("Error: More than one '.' in the number.");
-        size_t afterPos = value.find_first_not_of(" \t", pos);
-        if (afterPos != std::string::npos) 
-            throw std::invalid_argument("Error: Invalid characters after number.");
-        return true;
+void BitcoinExchange::isValidNumber(const std::string& value) {
+    size_t dote_count = 0;
+    size_t space_count = 0;
+    size_t minus_count = 0;
+    size_t plus_count = 0;
+    bool    found_digit = false;
+    
+    for (unsigned int  i = 0; i < value.size(); i++) {
+        if (isdigit(value[i])) {
+            found_digit = true;
+            continue;
+        }
+        if (value[i] == '.') {
+            ++dote_count;
+            continue;
+        }
+        if (value[i] == ' ') {
+            ++space_count;
+            continue;
+        }
+        if (value[i] == '+') {
+            ++plus_count;
+            continue;
+        }
+        if (value[i] == '-') {
+            ++minus_count;
+            continue;
+        }
+        throw std::invalid_argument("Invalide number => " + value);
     }
-    catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
+    long long max_value = std::stoll(value);
+    if (max_value > std::numeric_limits<int>::max())
+        throw std::invalid_argument("too large a number");
+    if (!found_digit)
+        throw std::invalid_argument("Invalide number => " + value);
+    if (dote_count > 1)
+        throw std::invalid_argument("Invalide number more than one '.' in the number => " + value);
+    if (space_count > 1)
+        throw std::invalid_argument("Invalide number more than one space in the number => " + value);
+    if (!space_count)
+        throw std::invalid_argument("Invalide format (|number), the format should be (| number)");
+    if (dote_count == 1 && (value[1] == '.' || value.back() == '.'))
+        throw std::invalid_argument("Invalide number => " + value);
+    if (!(value.front() == ' '))
+        throw std::invalid_argument("Invalide number => " + value);
+    if (plus_count > 1 || minus_count > 1)
+        throw std::invalid_argument("Invalide number => " + value);
+    if (plus_count && value[1] != '+')
+        throw std::invalid_argument("Invalide number => " + value);
+    if (minus_count && value[1] == '-')
+        throw std::invalid_argument(" not a positive number");
 }
 
 void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
@@ -129,12 +165,8 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
         std::string value = line.substr(delim + 1);
 
         try {
-            if (!isValidDate(date)) {
-                throw std::invalid_argument("Erreur: Date invalide => " + date);
-            }
-            if (!isValidNumber(value)) {
-                throw std::invalid_argument("Erreur: Numbre invalide => " + value);
-            }
+            isValidDate(date);
+            isValidNumber(value);
             std::map<std::string, std::string>::iterator it;
             it = _data.lower_bound(date);
           if (it != _data.end()) {
@@ -151,6 +183,17 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
     file.close();
 }
 
+void BitcoinExchange::countMonthDays() 
+{
+            char* months31[] = {"01", "03", "05", "07", "08", "10", "12"};
+            char* months30[] = {"04", "06", "09", "11"};
+
+            for (char* month :months31)
+                _date[month] = 31;
+            for (char* month : months30) 
+                _date[month] = 30;
+}
+
 bool BitcoinExchange::isValidMonthLength(const std::string& date) const 
 {
     int year = std::stoi(date.substr(0, 4));
@@ -163,7 +206,7 @@ bool BitcoinExchange::isValidMonthLength(const std::string& date) const
     else if (month == 2) {
         if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
             return true; // Fevrier 29
-        else 
+        else
             return false;
     }
     else 
