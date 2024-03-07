@@ -165,7 +165,7 @@ void BitcoinExchange::isValidNumber(const std::string& value) {
         throw std::invalid_argument("Invalide number => " + value);
     if (plus_count && value[1] != '+')
         throw std::invalid_argument("Invalide number => " + value);
-    if (minus_count && value[1] == '-')
+    if (minus_count)
         throw std::invalid_argument(" not a positive number");
 }
 
@@ -203,13 +203,13 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
             std::map<std::string, std::string>::iterator it;
 
             if (_data.count(date) == 1) {
-                std::cout << date << " => " << value << " = " << std::stod(_data[date]) * std::stod(value) << std::endl;
+                std::cout << date << " => " << value << " = " << ft_stod(_data[date]) * ft_stod(value) << std::endl;
             }
             else {
                 it = _data.lower_bound(date);
                 if (it != _data.begin()) {
                     --it;
-                    std::cout << date << " => " << value << " = " << std::stod(it->second) * std::stod(value) << std::endl;
+                    std::cout << date << " => " << value << " = " << ft_stod(it->second) * ft_stod(value) << std::endl;
                 }
                 else 
                     std::cout << "Error: Date not found in map => " << date << '\n';
@@ -221,4 +221,3 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
     }
     file.close();
 }
-
