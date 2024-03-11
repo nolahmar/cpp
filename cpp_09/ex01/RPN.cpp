@@ -6,7 +6,7 @@
 /*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:02:27 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/07 16:32:33 by nolahmar         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:28:25 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ bool is_operator(char c)
     return c == '+' || c == '-' || c == '*' || c == '/';
 }
 
-int calcule_operation(int parti1, int parti2, char op) {
+int calcule_operation(int lhs, int rhs, char op) {
     switch (op) {
         case '+': 
-            return parti1 + parti2;
+            return lhs + rhs;
         case '-':
-            return parti1 - parti2;
+            return lhs - rhs;
         case '*':
-            return parti1 * parti2;
+            return lhs * rhs;
         case '/':
-            if (parti2 != 0)
-                return parti1 / parti2;
+            if (rhs != 0)
+                return lhs / rhs;
             else {
                 std::cerr << "Error: Division by zero" << std::endl;
                 exit(1);
@@ -49,35 +49,35 @@ int calcule_operation(int parti1, int parti2, char op) {
 }
 
 int evaluate_rpn(const std::string& expression) {
-    std::stack<int> part;
+    std::stack<int> stack;
 
     std::istringstream iss(expression);
     std::string token;
 
     while (iss >> token) {
         if (isdigit(token[0]))
-            part.push(ft_stoi(token));
+            stack.push(ft_stoi(token));
         else if (is_operator(token[0])) {
-            if (part.size() < 2) {
+            if (stack.size() < 2) {
                 std::cerr << "Error" << std::endl;
                 exit(1);
             }
 
-            int part2 = part.top();
-            part.pop();
-            int part1 = part.top();
-            part.pop();
+            int rhs = stack.top();
+            stack.pop();
+            int lhs = stack.top();
+            stack.pop();
 
-            int result = calcule_operation(part1, part2, token[0]);
-            part.push(result);
+            int result = calcule_operation(lhs, rhs, token[0]);
+            stack.push(result);
         } else {
             std::cerr << "Error" << std::endl;
             exit(1);
         }
     }
 
-    if (part.size() == 1)
-        return part.top();
+    if (stack.size() == 1)
+        return stack.top();
     else {
         std::cerr << "Error" << std::endl;
         exit(1);
