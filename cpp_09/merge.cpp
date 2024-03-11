@@ -52,18 +52,98 @@ std::list<int> merge_list(std::list<int> linkedList)
         return linkedList;
     
     int mid = linkedList.size() / 2;
-    std::list<int> leftlist(linkedList.begin(), linkedList.begin() + mid);
-    std::list<int> rightlist(linkedList.begin() + mid, linkedList.end());
+
+    std::list<int>::iterator midIter = linkedList.begin();
+     for (int i = 0; i < mid; ++i)
+        ++midIter;
+
+    std::list<int> leftList(linkedList.begin(), midIter);
+    std::list<int> rightList(midIter, linkedList.end());
+
+    leftList = merge_list(leftList);
+    rightList = merge_list(rightList);
+
+    int n1 = leftList.size();
+    int n2 = rightList.size();
+
+    std::list<int>::iterator leftIter = leftList.begin();
+    std::list<int>::iterator rightIter = rightList.begin();
+
+    std::list<int> mergedList;
+
+    int i = 0;
+    int j = 0;
+
+    while (i < n1 && j < n2)
+    {
+        if (*leftIter < *rightIter)
+        {
+            mergedList.push_back(*leftIter);
+            ++leftIter;
+            ++i;
+        }
+        else
+        {
+            mergedList.push_back(*rightIter);
+            ++rightIter;
+            ++j;
+        }
+    }
+    while (i < n1)
+    {
+        mergedList.push_back(*leftIter);
+        ++leftIter;
+        ++i;
+    }
+    while (j < n2)
+    {
+        mergedList.push_back(*rightIter);
+        ++rightIter;
+        ++j;
+    }
+    return mergedList;
 }
+
+
+void insertionSort(std::vector<int> array)
+{
+    for (int i = 1; i < array.size(); ++i)
+    {
+        int key = array[i];
+        int j = i - 1;
+        while (j >= 0 && array[j] > key)
+        {
+            array[j + 1] = array[j];
+            j = j - 1;
+        }
+        array[j + 1] = key;
+    }
+}
+
 
 int main()
 {
     std::vector<int> v;
     v.push_back(5);
-    v.push_back(3);
+    v.push_back(234);
     v.push_back(-1);
-    v.push_back(3);
-    v = merge(v);
+    v.push_back(0);
     for (int i = 0; i < v.size(); ++i)
         std::cout << v[i] << std::endl; 
 }
+
+// int main()
+// {
+//     std::list<int> v;
+//     // v.push_back(5);
+//     v.push_back(344);
+//     v.push_back(4567);
+//     v.push_back(0);
+
+//     v = merge_list(v);
+
+//     for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) {
+//         std::cout << *it << std::endl;
+//     }
+//     return 0;
+// }
