@@ -157,31 +157,87 @@ std::vector<int> sort_vector(std::vector<int> inputVector)
     return vector1;
 }
 
-int main()
+std::list<int>::iterator binarySearch_list(std::list<int>& sortedList, int element)
 {
-    std::vector<int> v;
-    v.push_back(5);
-    v.push_back(-1);
-    v.push_back(5);
-    v.push_back(5);
-    v.push_back(5);
-    // v.push_back(80);
-    // v.push_back(122);
-    //v = merge(v);
-    v = sort_vector(v);
-    for (int i = 0; i < v.size(); ++i)
-        std::cout << v[i] << std::endl; 
+    std::list<int>::iterator start = sortedList.begin();
+    std::list<int>::iterator end = sortedList.end();
+
+    while (start != end)
+    {
+        std::list<int>::iterator mid = std::next(start, std::distance(start, end) / 2);
+
+        if (*mid == element)
+            return mid;
+        if (*mid < element)
+            start = std::next(mid);
+        else
+            end = mid;
+    }
+    return start;
+}
+
+std::list<int> sort_list(std::list<int> inputList)
+{
+    if (inputList.size() < 2)
+        return inputList;
+
+    std::list<int> list1;
+    std::list<int> list2;
+
+    for (std::list<int>::iterator it = inputList.begin(); std::next(it) != inputList.end(); std::advance(it, 2))
+    {
+        int first_element = *it;
+        int second_element = *std::next(it);
+
+        if (first_element > second_element)
+        {
+            list1.push_back(first_element);
+            list2.push_back(second_element);
+        }
+        else
+        {
+            list1.push_back(second_element);
+            list2.push_back(first_element);
+        }
+    }
+    if (list1.size() + list2.size() != inputList.size())
+        list1.push_back(inputList.back());
+
+    list1 = merge_list(list1);
+
+    for (std::list<int>::iterator it = list2.begin(); it != list2.end(); ++it)
+    {
+        std::list<int>::iterator position = binarySearch_list(list1, *it);
+        list1.insert(position, *it);
+    }
+    return list1;
 }
 
 // int main()
 // {
-//     std::list<int> v;
+//     std::vector<int> v;
 //     v.push_back(5);
-//     v.push_back(344);
-//     v.push_back(-4567);
-//     // v.push_back(0);
-//     v = merge_list(v);
-//     for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) 
-//         std::cout << *it << std::endl;
-//     return 0;
+//     v.push_back(-1);
+//     v.push_back(5);
+//     v.push_back(5);
+//     v.push_back(5);
+//     // v.push_back(80);
+//     // v.push_back(122);
+//     //v = merge(v);
+//     v = sort_vector(v);
+//     for (int i = 0; i < v.size(); ++i)
+//         std::cout << v[i] << std::endl; 
 // }
+
+int main()
+{
+    std::list<int> v;
+    v.push_back(5);
+    v.push_back(344);
+    v.push_back(-4567);
+    v.push_back(0);
+    v = sort_list(v);
+    for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) 
+        std::cout << *it << std::endl;
+    return 0;
+}
