@@ -104,30 +104,71 @@ std::list<int> merge_list(std::list<int> linkedList)
     return mergedList;
 }
 
-
-void insertionSort(std::vector<int> array)
+int binarySearch(std::vector<int>& sortedVector, int element)
 {
-    for (int i = 1; i < array.size(); ++i)
+    int start = 0;
+    int end = sortedVector.size() - 1;
+
+    while (start <= end) 
     {
-        int key = array[i];
-        int j = i - 1;
-        while (j >= 0 && array[j] > key)
-        {
-            array[j + 1] = array[j];
-            j = j - 1;
-        }
-        array[j + 1] = key;
+        int mid = (end + start) / 2;
+        if (sortedVector[mid] == element)
+            return mid;
+        if (sortedVector[mid] < element) 
+            start = mid + 1;
+        else 
+            end = mid - 1;
     }
+    return start;
 }
 
+std::vector<int> sort_vector(std::vector<int> inputVector) 
+{
+    if (inputVector.size() < 2)
+        return inputVector;
+    std::vector<int> vector1;
+    std::vector<int> vector2;
+
+    for (size_t i = 0; i < inputVector.size() - 1; i += 2) 
+    {
+        int first_element = inputVector[i];
+        int second_element  = inputVector[i + 1];
+
+        if (first_element > second_element) 
+        {
+            vector1.push_back(first_element);
+            vector2.push_back(second_element);
+        } 
+        else 
+        {
+            vector1.push_back(second_element);
+            vector2.push_back(first_element);
+        }
+    }
+    if (vector1.size() + vector2.size() != inputVector.size())
+        vector1.push_back(inputVector.back());
+    vector1 = merge(vector1);
+    for (size_t i = 0; i < vector2.size(); ++i)
+    {
+        int elem = vector2[i];
+        int index = binarySearch(vector1, elem);
+        vector1.insert(vector1.begin() + index, elem);
+    }
+    return vector1;
+}
 
 int main()
 {
     std::vector<int> v;
     v.push_back(5);
-    v.push_back(234);
     v.push_back(-1);
-    v.push_back(0);
+    v.push_back(5);
+    v.push_back(5);
+    v.push_back(5);
+    // v.push_back(80);
+    // v.push_back(122);
+    //v = merge(v);
+    v = sort_vector(v);
     for (int i = 0; i < v.size(); ++i)
         std::cout << v[i] << std::endl; 
 }
@@ -135,15 +176,12 @@ int main()
 // int main()
 // {
 //     std::list<int> v;
-//     // v.push_back(5);
+//     v.push_back(5);
 //     v.push_back(344);
-//     v.push_back(4567);
-//     v.push_back(0);
-
+//     v.push_back(-4567);
+//     // v.push_back(0);
 //     v = merge_list(v);
-
-//     for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) {
+//     for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) 
 //         std::cout << *it << std::endl;
-//     }
 //     return 0;
 // }
