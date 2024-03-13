@@ -1,6 +1,22 @@
-#include <iostream>
-#include <vector>
-#include <list>
+#include "PmergeMe.hpp"
+
+
+void    is_valid_input(const std::string& str)
+{
+    for (size_t i = 0; i < str.size(); i++)
+        if (!isdigit(str[i]))
+            throw std::out_of_range("Error\n");
+}
+
+long long ft_stoi(const std::string &str)
+{
+    std::stringstream ss(str);
+    long long value;
+
+    if (ss >> value)
+        return value;
+    throw std::out_of_range("Error\n");
+}
 
 std::vector<int> merge(std::vector<int> array)
 {
@@ -124,6 +140,7 @@ int binarySearch(std::vector<int>& sortedVector, int element)
 
 std::vector<int> sort_vector(std::vector<int> inputVector) 
 {
+    //  std::clock_t start = std::clock();
     if (inputVector.size() < 2)
         return inputVector;
     std::vector<int> vector1;
@@ -154,6 +171,9 @@ std::vector<int> sort_vector(std::vector<int> inputVector)
         int index = binarySearch(vector1, elem);
         vector1.insert(vector1.begin() + index, elem);
     }
+    // std::clock_t end = std::clock();
+    // double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    // std::cout << "Time to process a range of " <<  inputVector.size() << " elements with std::vector: " << time << std::endl;
     return vector1;
 }
 
@@ -176,68 +196,47 @@ std::list<int>::iterator binarySearch_list(std::list<int>& sortedList, int eleme
     return start;
 }
 
-std::list<int> sort_list(std::list<int> inputList)
+std::list<int> sort_list(std::list<int>& inputList)
 {
+    //  std::clock_t start = std::clock();
     if (inputList.size() < 2)
         return inputList;
 
     std::list<int> list1;
     std::list<int> list2;
 
-    for (std::list<int>::iterator it = inputList.begin(); std::next(it) != inputList.end(); std::advance(it, 2))
-    {
+    std::list<int>::iterator it = inputList.begin();
+    while (it != inputList.end()) {
         int first_element = *it;
-        int second_element = *std::next(it);
+        ++it;
+        if (it != inputList.end()) {
+            int second_element = *it;
 
-        if (first_element > second_element)
-        {
-            list1.push_back(first_element);
-            list2.push_back(second_element);
-        }
-        else
-        {
-            list1.push_back(second_element);
-            list2.push_back(first_element);
+            if (first_element > second_element) 
+            {
+                list1.push_back(first_element);
+                list2.push_back(second_element);
+            }
+            else
+            {
+                list1.push_back(second_element);
+                list2.push_back(first_element);
+            }
+            ++it;
         }
     }
     if (list1.size() + list2.size() != inputList.size())
         list1.push_back(inputList.back());
 
     list1 = merge_list(list1);
-
     for (std::list<int>::iterator it = list2.begin(); it != list2.end(); ++it)
     {
         std::list<int>::iterator position = binarySearch_list(list1, *it);
         list1.insert(position, *it);
     }
+    // std::clock_t end = std::clock();
+
+    // double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    // std::cout << "Time to process a range of " << inputList.size() << "elements with std::list: "<< time << std::endl;
     return list1;
-}
-
-// int main()
-// {
-//     std::vector<int> v;
-//     v.push_back(5);
-//     v.push_back(-1);
-//     v.push_back(5);
-//     v.push_back(5);
-//     v.push_back(5);
-//     // v.push_back(80);
-//     // v.push_back(122);
-//     //v = merge(v);
-//     v = sort_vector(v);
-//     for (int i = 0; i < v.size(); ++i)
-//         std::cout << v[i] << std::endl; 
-// }
-
-int main()
-{
-    std::list<int> v;
-    v.push_back(5);
-    v.push_back(344);
-    v.push_back(-4567);
-    v.push_back(0);
-    v = sort_list(v);
-    for (std::list<int>::iterator it = v.begin(); it != v.end(); ++it) 
-        std::cout << *it << std::endl;
-    return 0;
 }
