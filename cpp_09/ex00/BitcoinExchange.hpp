@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noni <noni@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nolahmar <nolahmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:52:47 by nolahmar          #+#    #+#             */
-/*   Updated: 2024/03/06 19:34:23 by noni             ###   ########.fr       */
+/*   Updated: 2024/03/14 15:59:44 by nolahmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BITCOINEXCHANDE_HPP
-#define BITCOINEXCHANDE_HPP
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
 #include <iostream>
 #include <map>
 #include <fstream>
 #include <string>
 #include <exception>
-#include <limits>
+#include <iomanip>
 #include <sstream>
 
 class BitcoinExchange {

@@ -61,7 +61,7 @@ void BitcoinExchange::read_data(const std::string& filename)
     size_t delim;
    std::ifstream file(filename);
    if (!file.is_open()) {
-    std::cerr << "Error opening file: " << filename << std::endl;
+    std::cout << "Error opening file: " << filename << std::endl;
     return ;
    }
    std::string line;
@@ -102,7 +102,7 @@ void BitcoinExchange::isValidDate(std::string& date) {
 
     if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31)
         throw std::invalid_argument("Invalide date => " + date);
-    if ((day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)) || (day > 29 && month == 2))
+    if ((day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)))
         throw std::invalid_argument("Invalid date => " + date);
     else if (day > 31)
         throw std::invalid_argument("Invalid date => " + date);
@@ -146,9 +146,6 @@ void BitcoinExchange::isValidNumber(const std::string& value) {
         }
         throw std::invalid_argument("Invalide number => " + value);
     }
-    double  max_value = ft_stod(value);
-    if (max_value > std::numeric_limits<int>::max())
-        throw std::invalid_argument("too large a number");
     if (!found_digit)
         throw std::invalid_argument("Invalide number => " + value);
     if (dote_count > 1)
@@ -167,6 +164,8 @@ void BitcoinExchange::isValidNumber(const std::string& value) {
         throw std::invalid_argument("Invalide number => " + value);
     if (minus_count)
         throw std::invalid_argument(" not a positive number");
+    if (ft_stod(value) > 1000)
+        throw std::invalid_argument("too large a number");
 }
 
 void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
@@ -190,7 +189,7 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
     while (std::getline(file, line)) {
         size_t delim = line.find('|');
         if (delim == std::string::npos) {
-            std::cout << "Error: bad input  => " << line << '\n';
+            std::cout << "Error: bad input  => " << line << std::endl;;
             continue;
         }
         std::string date = line.substr(0, delim);
@@ -202,21 +201,28 @@ void BitcoinExchange::readAndVerifyFile(const std::string& filename) {
 
             std::map<std::string, std::string>::iterator it;
 
-            if (_data.count(date) == 1) {
-                std::cout << date << " => " << value << " = " << ft_stod(_data[date]) * ft_stod(value) << std::endl;
-            }
-            else {
-                it = _data.lower_bound(date);
-                if (it != _data.begin()) {
-                    --it;
-                    std::cout << date << " => " << value << " = " << ft_stod(it->second) * ft_stod(value) << std::endl;
-                }
-                else 
-                    std::cout << "Error: Date not found in map => " << date << '\n';
-            }
+            it = _data.lower_bound(date);
+            /* There is no date in the _data, but we have a smaller date which is the bigger one in the _data */
+            if (it == _data.end())
+                std::cout << date << " => " << value << " = " << std::setprecision(3)
+                    << std::fixed << ft_stod((_data.rbegin()->second)) * ft_stod(value) << std::endl;
+            /* There is a date in the _data */
+            else if (it->first == date)
+                std::cout << date << " => " << value << " = " << std::setprecision(3)
+                    << std::fixed << ft_stod(it->second) * ft_stod(value) << std::endl;
+            /*
+                There is no date in the _data, but we found a bigger one so we should get the date before it,
+                so we should decrement the iterator if it's not the begin of the _data.
+            */
+            else if (it->first != (_data.begin())->first)
+                std::cout << date << " => " << value << " = " << std::setprecision(3)
+                    << std::fixed << ft_stod((--it)->second) * ft_stod(value) << std::endl;
+            /* If it's the begin means there is no valid date */
+            else
+                std::cout << "Error: Date not found in map => " << date << '\n';
         } 
         catch (const std::exception& e) {
-            std::cerr << "Error: " << e.what() << std::endl;
+            std::cout << "Error: " << e.what() << std::endl;
         }
     }
     file.close();

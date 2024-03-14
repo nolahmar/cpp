@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 
-
 void    is_valid_input(const std::string& str)
 {
     for (size_t i = 0; i < str.size(); i++)
@@ -140,7 +139,6 @@ int binarySearch(std::vector<int>& sortedVector, int element)
 
 std::vector<int> sort_vector(std::vector<int> inputVector) 
 {
-    //  std::clock_t start = std::clock();
     if (inputVector.size() < 2)
         return inputVector;
     std::vector<int> vector1;
@@ -171,9 +169,6 @@ std::vector<int> sort_vector(std::vector<int> inputVector)
         int index = binarySearch(vector1, elem);
         vector1.insert(vector1.begin() + index, elem);
     }
-    // std::clock_t end = std::clock();
-    // double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    // std::cout << "Time to process a range of " <<  inputVector.size() << " elements with std::vector: " << time << std::endl;
     return vector1;
 }
 
@@ -198,7 +193,6 @@ std::list<int>::iterator binarySearch_list(std::list<int>& sortedList, int eleme
 
 std::list<int> sort_list(std::list<int>& inputList)
 {
-    //  std::clock_t start = std::clock();
     if (inputList.size() < 2)
         return inputList;
 
@@ -234,9 +228,5 @@ std::list<int> sort_list(std::list<int>& inputList)
         std::list<int>::iterator position = binarySearch_list(list1, *it);
         list1.insert(position, *it);
     }
-    // std::clock_t end = std::clock();
-
-    // double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    // std::cout << "Time to process a range of " << inputList.size() << "elements with std::list: "<< time << std::endl;
     return list1;
 }

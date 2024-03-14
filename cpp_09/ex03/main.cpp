@@ -1,41 +1,9 @@
 #include "PmergeMe.hpp"
 
-// int main()
-// {
-//     std::cout<<" -----------sort list---------------------"<< std::endl;
-//     std::list<int> l;
-//     l.push_back(0);
-//     l.push_back(344);
-//     l.push_back(-4567);
-//     l.push_back(5);
-//     l.push_back(5);
-//     l.push_back(11);
-//     l.push_back(-40);
-//     // l.push_back(9999);
-//     // l.push_back(25);
-//     l = sort_list(l);
-//     for (std::list<int>::iterator it = l.begin(); it != l.end(); ++it) 
-//         std::cout << *it << std::endl;
-//     std::cout << "------------------------------------------" << std::endl;
-//     std::cout << "-----------------sort vector---------------" << std::endl;
-//     std::vector<int> v;
-//     v.push_back(5);
-//     v.push_back(-1);
-//     v.push_back(5);
-//     v.push_back(5);
-//     v.push_back(5);
-//     v.push_back(80);
-//     v.push_back(122);
-//     v = sort_vector(v);
-//     for (size_t i = 0; i < v.size(); ++i)
-//         std::cout << v[i] << std::endl; 
-//     return 0;
-// }
-
 int main(int argc, char* argv[]) 
 {
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <list of integers>" << std::endl;
+        std::cout << "Usage: " << argv[0] << " <list of integers>" << std::endl;
         return 1;
     }
 
@@ -61,7 +29,6 @@ int main(int argc, char* argv[])
             return 1;
         }
     }
-
     std::vector<int> sortedVector = sort_vector(inputVector);
     std::cout << "After:";
     for (size_t i = 0; i < sortedVector.size(); ++i) 
